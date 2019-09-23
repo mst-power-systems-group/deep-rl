@@ -1,7 +1,7 @@
 
 import numpy as np
 import random
-import collections as coll
+#import collections as coll
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.optimizers import adam
@@ -34,7 +34,7 @@ def replay(params.sample_batch_size):
         params.sample_batch = random.sample(params.memory, params.sample_batch_size)
         for state, action, reward, next_state in params.sample_batch:
             #target = reward
-            target = reward + params..gamma * np.amax((_build_model()).predict(next_state)[0])
+            target = reward + params.gamma * np.amax((_build_model()).predict(next_state)[0])
             target_f = (_build_model()).predict(state)
             target_f[0][action] = target
             (_build_model()).fit(state, target_f, epochs=10, verbose=2)
