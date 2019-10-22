@@ -1,6 +1,7 @@
 
 import numpy as np
 import random
+from keras.models import model_from_json
 #import collections as coll
 from keras.models import Sequential
 from keras.layers import Dense
@@ -59,10 +60,8 @@ def execute(next_state, reward):
         replay(params.sample_batch_size)
      
         return params.action
- 
- 
 
-     
+
             
            
     
