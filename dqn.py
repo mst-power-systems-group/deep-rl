@@ -1,5 +1,6 @@
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.optimizers import Adam
 import random
 import numpy as np
 import params
@@ -8,7 +9,9 @@ model = Sequential()
 model.add(Dense(24, input_dim=params.state_size, activation='relu'))
 model.add(Dense(24, activation='relu'))
 model.add(Dense(params.action_size, activation='linear'))
-model.compile(loss='mse', optimizer=Adam(lr=params.alpha))
+
+adam = Adam(lr=params.alpha)
+model.compile(loss='mse', optimizer=adam)
 
     
 def remember(state, action, reward, next_state):
