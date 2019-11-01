@@ -1,6 +1,7 @@
 from keras.models import Sequential
 from keras.layers import Dense
 import random
+import numpy as np
 import params
         
 model = Sequential()
