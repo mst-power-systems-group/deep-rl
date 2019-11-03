@@ -9,9 +9,7 @@ model = Sequential()
 model.add(Dense(24, input_dim=params.state_size, activation='relu'))
 model.add(Dense(24, activation='relu'))
 model.add(Dense(params.action_size, activation='linear'))
-
-adam = Adam(lr=params.alpha)
-model.compile(loss='mse', optimizer=adam)
+model.compile(loss='mse', optimizer=Adam(lr=params.alpha, decay=params.alpha_decay))
 
     
 def remember(state, action, reward, next_state):
@@ -47,7 +45,9 @@ def execute(state, reward):
 
     agent_next_state[state] = 1
 
-    agent_next_state = np.array(agent_state)
+    agent_next_state = np.array(agent_next_state)
+
+    agent_next_state = np.reshape(agent_next_state, [1, params.state_size])
 
     remember(params.agent_current_state, params.action, reward, agent_next_state)
 
