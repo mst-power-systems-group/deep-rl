@@ -47,7 +47,8 @@ grads = zip(actor_grads, actor_model_weights)
 optimize = tf.train.AdamOptimizer(params.learning_rate).apply_gradients(grads)
 
 
-critic_state_input, critic_action_input, critic_model = create_critic_model(), _, _,  target_critic_model = create_critic_model()
+critic_state_input, critic_action_input, critic_model = create_critic_model()
+_, _,  target_critic_model = create_critic_model()
 
 critic_grads = tf.gradients(critic_model.output, critic_action_input) # where we calcaulte de/dC for feeding above
 
