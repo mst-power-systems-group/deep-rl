@@ -153,10 +153,10 @@ def update_target():
 
 def act(state):
     if np.random.rand() <= params.epsilon:
-        return random.randrange(params.action_size)
+        return random.uniform(0.5, 10.0)
         
     act_values = actor_model.predict(state)
-    return np.argmax(act_values[0])
+    return act_values[0]
 
 
 def execute(state, reward):
