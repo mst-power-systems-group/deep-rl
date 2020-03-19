@@ -19,7 +19,7 @@ def make_samples(samples):
     rewards = np.stack(array[:,2]).reshape((array.shape[0],-1))
     new_states = np.stack(array[:,3]).reshape((array.shape[0],-1))
 	
-    return current_states, actions, rewards, new_states, dones
+    return current_states, actions, rewards, new_states
 	
 
 sess = tf.Session()
@@ -95,7 +95,7 @@ def _train_actor(samples):
 		
     cur_states, actions, rewards, new_states =  make_samples(samples)
     predicted_actions = actor_model.predict(cur_states)
-    grads = self.sess.run(critic_grads, feed_dict={
+    grads = sess.run(critic_grads, feed_dict={
 	critic_state_input:  cur_states,
 	critic_action_input: predicted_actions
     })[0]
@@ -156,7 +156,7 @@ def act(state):
         return random.uniform(0.5, 10.0)
         
     act_values = actor_model.predict(state)
-    return act_values[0]
+    return act_values[0][0]
 
 
 def execute(state, reward):
